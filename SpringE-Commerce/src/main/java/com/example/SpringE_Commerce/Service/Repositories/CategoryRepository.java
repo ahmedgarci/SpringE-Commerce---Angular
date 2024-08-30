@@ -6,9 +6,9 @@ import com.example.SpringE_Commerce.Entities.Category;
 
 public interface CategoryRepository extends JpaRepository<Category,Long> {
     
-    Category findByCategoryName(String CategoryName);
+    Category findByCategoryName(String categoryName);
     
-    boolean existsByName(String CategoryName);
+    boolean existsByCategoryName(String categoryName);
 
     
 }

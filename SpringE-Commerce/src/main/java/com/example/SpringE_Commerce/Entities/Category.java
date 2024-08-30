@@ -20,15 +20,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 public class Category {
-    public Category(String newCategoryName) {
-        this.CategoryName = newCategoryName;
-    }
+    
+    public Category(String name){this.categoryName=name;}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String CategoryName;
+    private String categoryName;
 
     @OneToMany(mappedBy ="category", cascade =  CascadeType.ALL )
     private List<Product> products;

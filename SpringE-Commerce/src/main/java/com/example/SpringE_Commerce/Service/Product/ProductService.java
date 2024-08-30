@@ -70,12 +70,12 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> getAllProductsByCategory(Category Category) {
-        return productRepository.findAllByCategoryName(Category.getCategoryName());
+        return productRepository.findAllByCategory_CategoryName(Category.getCategoryName());
     }
 
     @Override
     public Product getProductByName(String name) {
-        return productRepository.findByProductName(name);
+        return productRepository.findByName(name);
     }
 
     private Product updateExistingProduct(Product existingProduct, ProductUpdateRequest request) {
