@@ -1,7 +1,8 @@
-package com.example.SpringE_Commerce.Entities;
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.example.SpringE_Commerce.Entities;
+
+import java.math.BigDecimal;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -10,29 +11,30 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class Category {
-    
-    public Category(String name){this.categoryName=name;}
+public class Cart{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String categoryName;
+    private BigDecimal total = BigDecimal.ZERO;
 
-    @JsonIgnore
-    @OneToMany(mappedBy ="category", cascade =  CascadeType.ALL )
-    private List<Product> products;
-    
+    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL,orphanRemoval = true)
+    private Set<CartItem> items;
+
+
+    public void updateTotal(){
+        this.total = items.stream()
+            .map(CartItem::getTotalPrice)
+            .reduce(BigDecimal.ZERO,BigDecimal::add);
+    }
+
+
 }
