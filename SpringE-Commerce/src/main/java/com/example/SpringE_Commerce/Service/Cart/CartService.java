@@ -1,15 +1,15 @@
 package com.example.SpringE_Commerce.Service.Cart;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.example.SpringE_Commerce.Entities.Cart;
 import com.example.SpringE_Commerce.Entities.CartItem;
+import com.example.SpringE_Commerce.Entities.Product;
+import com.example.SpringE_Commerce.Exceptions.ProductNotFoundException;
 import com.example.SpringE_Commerce.Exceptions.ResourceNotFoundException;
 import com.example.SpringE_Commerce.Service.Repositories.CartItemReposiotry;
 import com.example.SpringE_Commerce.Service.Repositories.CartRepository;
+import com.example.SpringE_Commerce.Service.Repositories.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,11 +18,14 @@ import lombok.RequiredArgsConstructor;
 public class CartService implements ICartService {
     private final CartRepository cartRepository;
     private final CartItemReposiotry cartItemReposiotry;
-
+    private final ProductRepository productRepository;
 
     @Override
     public Cart getCart(Long id) {
         Cart cart =  cartRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("cart not found"));
+        if(cart == null){
+            cart = new Cart();
+        }
         cart.updateTotal();
         return cart;
     }
@@ -38,14 +41,24 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public void addItemToCart(Long CartId, CartItem item) {
+    public void addItemToCart(Long CartId, CartItem item ,int quatity) {
         Cart cart = getCart(CartId);
-        item.setCart(cart);
-        
-        cart.getItems().add(item);
+        Product product = productRepository.findById(item.getProduct().getId())
+        .orElseThrow(()->new ProductNotFoundException("product cannot be found"));
+
+        CartItem cartItem = cart.getItems().stream()
+        .filter(item-> item.getProduct().getId().equals(product.getId()))
+        .findFirst().orElse(new CartItem());
+
+        if(cartItem.getId() == null){
+            cartItem.setProduct(product);
+            cartItem.setQuantity(quatity);
+            cartItem.setUnitPrice(product.getPrice());
+        }else{
+            cartItem.setQuantity(cartItem.getQuantity() + quatity);
+        }
         cart.updateTotal();
-     
-        cartItemReposiotry.save(item);
+        cartItemReposiotry.save(cartItem);
         cartRepository.save(cart);
     }
 
