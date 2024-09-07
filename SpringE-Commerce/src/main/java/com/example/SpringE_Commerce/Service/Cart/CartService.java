@@ -2,6 +2,8 @@ package com.example.SpringE_Commerce.Service.Cart;
 
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 import com.example.SpringE_Commerce.Entities.Cart;
 import com.example.SpringE_Commerce.Entities.CartItem;
 import com.example.SpringE_Commerce.Entities.Product;
@@ -41,19 +43,19 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public void addItemToCart(Long CartId, CartItem item ,int quatity) {
+    public void addItemToCart(Long CartId, Long  ProductId ,int quatity) {
         Cart cart = getCart(CartId);
-        Product product = productRepository.findById(item.getProduct().getId())
+        Product product = productRepository.findById(ProductId)
         .orElseThrow(()->new ProductNotFoundException("product cannot be found"));
 
         CartItem cartItem = cart.getItems().stream()
-        .filter(item-> item.getProduct().getId().equals(product.getId()))
+        .filter((item)->item.getProduct().getId().equals(product.getId()))
         .findFirst().orElse(new CartItem());
 
         if(cartItem.getId() == null){
             cartItem.setProduct(product);
             cartItem.setQuantity(quatity);
-            cartItem.setUnitPrice(product.getPrice());
+            cartItem.setUnitPrice(new BigDecimal(product.getPrice()));
         }else{
             cartItem.setQuantity(cartItem.getQuantity() + quatity);
         }
