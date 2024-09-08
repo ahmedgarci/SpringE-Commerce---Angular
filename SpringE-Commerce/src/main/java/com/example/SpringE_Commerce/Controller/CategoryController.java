@@ -7,7 +7,6 @@ import com.example.SpringE_Commerce.Exceptions.AlreadyExistsException;
 import com.example.SpringE_Commerce.Exceptions.ResourceNotFoundException;
 import com.example.SpringE_Commerce.Responses.ApiResponse;
 import com.example.SpringE_Commerce.Service.Category.CategoryService;
-import com.example.SpringE_Commerce.requests.NewCategoryRequest;
 
 import lombok.RequiredArgsConstructor;
 
