@@ -9,9 +9,9 @@ import com.example.SpringE_Commerce.Entities.CartItem;
 import com.example.SpringE_Commerce.Entities.Product;
 import com.example.SpringE_Commerce.Exceptions.ProductNotFoundException;
 import com.example.SpringE_Commerce.Exceptions.ResourceNotFoundException;
-import com.example.SpringE_Commerce.Service.Repositories.CartItemReposiotry;
-import com.example.SpringE_Commerce.Service.Repositories.CartRepository;
-import com.example.SpringE_Commerce.Service.Repositories.ProductRepository;
+import com.example.SpringE_Commerce.Repositories.CartItemReposiotry;
+import com.example.SpringE_Commerce.Repositories.CartRepository;
+import com.example.SpringE_Commerce.Repositories.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 

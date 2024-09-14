@@ -1,4 +1,4 @@
-package com.example.SpringE_Commerce.Service.Repositories;
+package com.example.SpringE_Commerce.Repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

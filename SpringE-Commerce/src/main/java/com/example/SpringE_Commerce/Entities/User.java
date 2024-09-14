@@ -1,5 +1,6 @@
 package com.example.SpringE_Commerce.Entities;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +30,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class User implements UserDetails {
+public class User implements UserDetails,Principal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,6 +73,12 @@ public class User implements UserDetails {
         return email;
     }
 
+    @Override
+    public String getName() {
+        return fullName;
+    }
+
+    
  
     
 }

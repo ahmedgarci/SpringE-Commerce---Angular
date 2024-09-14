@@ -14,8 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.SpringE_Commerce.Entities.Image;
 import com.example.SpringE_Commerce.Entities.Product;
 import com.example.SpringE_Commerce.Exceptions.ResourceNotFoundException;
+import com.example.SpringE_Commerce.Repositories.ImageRepository;
 import com.example.SpringE_Commerce.Service.Product.ProductService;
-import com.example.SpringE_Commerce.Service.Repositories.ImageRepository;
 
 import lombok.RequiredArgsConstructor;
 

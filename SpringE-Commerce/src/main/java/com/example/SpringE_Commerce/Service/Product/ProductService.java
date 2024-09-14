@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import com.example.SpringE_Commerce.Entities.Category;
 import com.example.SpringE_Commerce.Entities.Product;
 import com.example.SpringE_Commerce.Exceptions.ProductNotFoundException;
-import com.example.SpringE_Commerce.Service.Repositories.CategoryRepository;
-import com.example.SpringE_Commerce.Service.Repositories.ProductRepository;
+import com.example.SpringE_Commerce.Repositories.CategoryRepository;
+import com.example.SpringE_Commerce.Repositories.ProductRepository;
 import com.example.SpringE_Commerce.requests.ProductRequest;
 import com.example.SpringE_Commerce.requests.ProductUpdateRequest;
 

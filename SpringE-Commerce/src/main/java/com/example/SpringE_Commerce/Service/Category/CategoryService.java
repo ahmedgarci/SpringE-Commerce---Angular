@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 import com.example.SpringE_Commerce.Entities.Category;
 import com.example.SpringE_Commerce.Exceptions.AlreadyExistsException;
 import com.example.SpringE_Commerce.Exceptions.ResourceNotFoundException;
-import com.example.SpringE_Commerce.Service.Repositories.CategoryRepository;
+import com.example.SpringE_Commerce.Repositories.CategoryRepository;
+
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 
